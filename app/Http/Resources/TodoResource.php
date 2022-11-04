@@ -18,7 +18,7 @@ class TodoResource extends JsonResource
             "id"=> $this->id,
             "name"=> $this->name,
             'category'=> new CategoryResource($this->whenLoaded('category')),
-            'status'=>$this->status
+            'is_checked'=>$this->is_checked
         ];;
     }
 }

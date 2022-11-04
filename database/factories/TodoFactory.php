@@ -19,8 +19,7 @@ class TodoFactory extends Factory
     {
         return [
             'name' => $this->faker->sentence(5),
-            'status'=>$this->faker->randomElement(['checked', 'unchecked']),
-            //'category_id'=>Category::all()->random()->id,
+            'is_checked'=>$this->faker->randomElement (['checked', 'unchecked']),
         ];
     }
 }

@@ -9,7 +9,7 @@ class Todo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'name', 'status'];
+    protected $fillable = ['category_id', 'name', 'is_checked'];
 
     public function category(){
         return $this->belongsTo(Category::class, 'category_id', 'id');

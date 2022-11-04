@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('name')->unique();
-            $table->enum('status', ['checked', 'unchecked'])->default('unchecked');
+            $table->enum('is_checked', ['checked', 'unchecked'])->default('checked');
             $table->timestamps();
         });
     }

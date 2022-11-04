@@ -45,7 +45,9 @@ class TodoController extends Controller
     public function store(TodoRequest $request)
     {
         try {
-            $todo = Todo::create($request->validated());
+            $data = $request->validated();
+            $data['is_checked'] = 'checked';
+            $todo = Todo::create($data);
             $data= new TodoResource($todo);
             return response()->sendSuccess($data, 'Todo Created Successfully');
         }catch (\Exception $exception){
@@ -84,7 +86,20 @@ class TodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        try {
+            $todo = Todo::findOrFail($id);
+            switch($todo->is_checked){
+                case 'checked':
+                    $todo->update(['is_checked'=>'unchecked']);
+                    break;
+                case 'unchecked':
+                    $todo->update(['is_checked'=>'checked']);
+                    break;
+            }
+            return response()->sendSuccess($todo, 'Todo updated Successfully');
+        }catch (\Exception $exception){
+            return \response()->sendErrorWithException($exception, 'OPPS! Something Wrong', 500);
+        }
     }
 
     /**
